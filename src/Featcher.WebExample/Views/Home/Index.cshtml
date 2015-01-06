@@ -1,0 +1,23 @@
+﻿@using Featcher
+@using Featcher.WebExample.Controllers
+@{
+    ViewBag.Title = "Home Page";
+}
+@if (FeatureSwitcher.IsEnabled(Features.BigGreenBox)) {
+    <p>BIG GREEN BOX!</p>
+}
+@if (FeatureSwitcher.IsEnabled(Features.BigRedBox)) {
+    <p>Big Red Box!</p>
+}
+@if (FeatureSwitcher.IsEnabled(Features.NuclearLaunch)) {
+    <p>Nuclear Launch!</p>
+}
+@foreach (var feature in Features.AllFeatures) {
+    <p>@feature.Name (@feature.Description)
+        @if (FeatureSwitcher.IsEnabled(feature)) {
+            <a href="@Url.Action("Index")?name=@feature&enable=false">disable</a>
+        } else {
+            <a href="@Url.Action("Index")?name=@feature&enable=true">enable!</a>
+        }
+    </p>
+}
