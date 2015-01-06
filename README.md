@@ -1,6 +1,9 @@
 Featcher
 ========
 
+**Feat**ure + swit**cher** == **Featcher**
+
+
 Lightweight feature switching for .NET
 
 * Uses session cookies to switch features on temporarily for testing, demo and review
