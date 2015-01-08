@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 
 namespace Featcher.WebExample.Controllers {
     public class HomeController : Controller {
         public ActionResult Index(string name, bool? enable) {
             var feature = Features.Find(name);
-            if (feature != null && enable.HasValue) FeatureSwitcher.Toggle(feature, enable.Value);
+            if (feature != null && enable.HasValue) {
+                FeatureSwitcher.Toggle(feature, enable.Value);
+            }
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
             return View();
         }
@@ -27,7 +26,6 @@ namespace Featcher.WebExample.Controllers {
     }
 
     public static class Features {
-
         public static Feature BigRedBox = new Feature("BigRedBox", "Shows a big red box on the landing page");
         public static Feature BigGreenBox = new Feature("BigGreenBox", "Shows a big green box on the landing page");
         public static Feature NuclearLaunch = new Feature("NuclearLaunch", "Allow users to launch nuclear missiles");
