@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<Featcher.Websites.Mvc2Demo.Models.IndexViewData>" %>
 
 <%@ Import Namespace="Featcher" %>
 <%@ Import Namespace="Featcher.Websites.Mvc2Demo" %>
@@ -7,20 +7,20 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Featcher: Feature Switching for .NET</h1>
-    <% if (FeatureSwitcher.IsEnabled(Features.NewsTicker)) { %>
+    <% if (Model.IsEnabled(Features.NewsTicker)) { %>
     <div style="border: 1px solid #f00; color: #f00; padding: 8px; margin: 8px;">THIS IS THE NEWS TICKER!</div>
     <% } %>
-    <% if (FeatureSwitcher.IsEnabled(Features.TwitterFeed)) { %>
+    <% if (Model.IsEnabled(Features.TwitterFeed)) { %>
     <div style="background-color: #55acee; color: #fff; padding: 8px; margin: 8px;">This is a Twitter feed. Check it out.</div>
     <% } %>
-    <% if (FeatureSwitcher.IsEnabled(Features.WysiwygEditor)) { %>
+    <% if (Model.IsEnabled(Features.WysiwygEditor)) { %>
     <div style="border: 1px solid #0c0; padding: 8px; margin: 8px;">This is the WYSIWIG editor. In this example it's enabled via web.config so you can't disable it.</div>
     <% } %>
     <% foreach (var feature in Features.AllFeatures) { %>
     <p>
         <%= feature.Name %>: <strong>
-            <%=FeatureSwitcher.IsEnabled(feature) ? "Enabled" : "Hidden" %></strong>
-        <% if (FeatureSwitcher.IsEnabled(feature)) { %>
+            <%=Model.IsEnabled(feature) ? "Enabled" : "Hidden"%></strong>
+        <% if (Model.IsEnabled(feature)) { %>
         <%=Html.ActionLink("disable", "Toggle", new { feature = feature.Name, enable = false}) %>
         <% } else { %>
         <%=Html.ActionLink("enable", "Toggle", new { feature = feature.Name, enable = true }) %>

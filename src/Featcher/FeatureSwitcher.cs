@@ -40,26 +40,17 @@ namespace Featcher {
         }
 
         public bool IsEnabled(string feature) {
-           
             var section = ConfigurationManager.GetSection("featcher");
             var featureSection = section as FeatureSection;
             if (featureSection != null) {
                 var configFeature = featureSection.Feature[feature];
-                if (configFeature.Enabled) {
-                    return (true);
-                }
+                if (configFeature.Enabled) return (true);
             }
-            if (HttpContext.Current == null) {
-                return (false);
-            }
+            if (HttpContext.Current == null) return (false);
             var cookies = HttpContext.Current.Request.Cookies;
             var cookie = cookies["featcher"];
-            if (cookie == null || !cookie.HasKeys) {
-                return (false);
-            }
-            if (cookie.Values[feature] == null) {
-                return (false);
-            }
+            if (cookie == null || !cookie.HasKeys) return (false);
+            if (cookie.Values[feature] == null) return (false);
             bool enabled;
             return Boolean.TryParse(cookie.Values[feature], out enabled) && enabled;
         }

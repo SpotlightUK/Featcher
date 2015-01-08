@@ -10,7 +10,8 @@ Lightweight feature switching for .NET
 * Uses custom config sections to turn things on for real when they're properly released.
 
 ```
-if(FeatureSwitcher.IsEnabled(Features.NewsTicker)) {
+var fs = new FeatureSwitcher();
+if (fs.IsEnabled(Features.NewsTicker)) {
   // show the news ticker!
 }
 ```
@@ -40,7 +41,9 @@ There's a slightly nicer way to manage them, though. Create a static class in **
 
 This gives you enum-style intellisense for your features:
 
-    if (FeatureSwitcher.IsEnabled(Features.BigRedBox)) {
+    var fs = new FeatureSwitcher();
+    
+    if (fs.IsEnabled(Features.BigRedBox)) {
       // do something with a big red box!
     }
 

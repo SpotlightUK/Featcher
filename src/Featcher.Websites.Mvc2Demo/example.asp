@@ -1,6 +1,5 @@
 ﻿<%@  language="JScript" %>
 <%
-
     function isFeatureEnabled(featureName) {
         try {
             // Note the use of the XPath 1.0 translate hack to make our feature name case-insensitive.
@@ -29,9 +28,5 @@
         <%=isFeatureEnabled("TwitterFeed") ? "Enabled" : "Disabled" %></p>
     <p>WYSIWYG Editor:
         <%=isFeatureEnabled("WysiwygEditor") ? "Enabled" : "Disabled" %></p>
-    <p>WYSIWYG Editor:
-        <%=isFeatureEnabled("WYSIWYGEDITOR") ? "Enabled" : "Disabled" %></p>
-    <p>WYSIWYG Editor:
-        <%=isFeatureEnabled("wysiwygeditor") ? "Enabled" : "Disabled" %></p>
 </body>
 </html>
