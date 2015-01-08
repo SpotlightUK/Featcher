@@ -1,9 +1,4 @@
-﻿using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Featcher {
+﻿namespace Featcher {
     public class Feature {
         public string Name { get; set; }
         public string Description { get; set; }

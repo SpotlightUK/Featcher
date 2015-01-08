@@ -11,12 +11,9 @@
 
 <p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
 
-@if (ViewBag.HasLocalPassword)
-{
+@if (ViewBag.HasLocalPassword) {
     @Html.Partial("_ChangePasswordPartial")
-}
-else
-{ 
+} else {
     @Html.Partial("_SetPasswordPartial")
 }
 
@@ -24,7 +21,7 @@ else
     @Html.Action("RemoveExternalLogins")
 
     <h3>Add an external login</h3>
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+    @Html.Action("ExternalLoginsList", new { ViewBag.ReturnUrl })
 </section>
 
 @section Scripts {

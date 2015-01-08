@@ -5,13 +5,13 @@ namespace Featcher.Configuration {
     public class FeatureCollection : ConfigurationElementCollection {
         public FeatureCollection() {
             var details = (FeatureElement)CreateNewElement();
-            if (details.Name != "") Add(details);
+            if (details.Name != "") {
+                Add(details);
+            }
         }
 
         public override ConfigurationElementCollectionType CollectionType {
-            get {
-                return ConfigurationElementCollectionType.BasicMap;
-            }
+            get { return ConfigurationElementCollectionType.BasicMap; }
         }
 
         protected override ConfigurationElement CreateNewElement() {
@@ -23,9 +23,7 @@ namespace Featcher.Configuration {
         }
 
         public FeatureElement this[int index] {
-            get {
-                return (FeatureElement)BaseGet(index);
-            }
+            get { return (FeatureElement)BaseGet(index); }
             set {
                 if (BaseGet(index) != null) {
                     BaseRemoveAt(index);
@@ -34,10 +32,8 @@ namespace Featcher.Configuration {
             }
         }
 
-        new public FeatureElement this[string name] {
-            get {
-                return (FeatureElement)BaseGet(name.ToLowerInvariant()) ?? new FeatureElement { Name = name, Enabled = false };
-            }
+        public new FeatureElement this[string name] {
+            get { return (FeatureElement)BaseGet(name.ToLowerInvariant()) ?? new FeatureElement { Name = name, Enabled = false }; }
         }
 
         public int IndexOf(FeatureElement details) {
@@ -48,12 +44,15 @@ namespace Featcher.Configuration {
             details.Name = details.Name.ToLowerInvariant();
             BaseAdd(details);
         }
+
         protected override void BaseAdd(ConfigurationElement element) {
             BaseAdd(element, false);
         }
 
         public void Remove(FeatureElement details) {
-            if (BaseIndexOf(details) >= 0) BaseRemove(details.Name.ToLowerInvariant());
+            if (BaseIndexOf(details) >= 0) {
+                BaseRemove(details.Name.ToLowerInvariant());
+            }
         }
 
         public void RemoveAt(int index) {
