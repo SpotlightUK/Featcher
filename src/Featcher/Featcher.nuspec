@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Featcher</id>
+    <version>0.0.0.0</version>
+    <authors>Spotlight</authors>
+    <description>Lightweight feature switching for .NET</description>
+    <owners>Spotlight</owners>
+    <projectUrl>https://www.github.com/spotlightuk/featcher</projectUrl>
+    <licenseUrl>http://www.spotlight.com/</licenseUrl>
+  </metadata>
+  <files>
+    <file src="Featcher.dll" target="lib" />
+  </files>
+</package>
