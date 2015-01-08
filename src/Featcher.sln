@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4CEFC1
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Featcher.Websites.Mvc2Demo", "Featcher.Websites.Mvc2Demo\Featcher.Websites.Mvc2Demo.csproj", "{24713A99-C980-4D5B-A5DC-ED2C605FB63E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{311AD5EC-4727-4D38-953E-CCBC5D6504BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{311AD5EC-4727-4D38-953E-CCBC5D6504BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{311AD5EC-4727-4D38-953E-CCBC5D6504BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24713A99-C980-4D5B-A5DC-ED2C605FB63E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24713A99-C980-4D5B-A5DC-ED2C605FB63E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24713A99-C980-4D5B-A5DC-ED2C605FB63E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24713A99-C980-4D5B-A5DC-ED2C605FB63E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

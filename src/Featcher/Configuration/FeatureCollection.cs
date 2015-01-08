@@ -19,7 +19,7 @@ namespace Featcher.Configuration {
         }
 
         protected override Object GetElementKey(ConfigurationElement element) {
-            return ((FeatureElement)element).Name;
+            return ((FeatureElement)element).Name.ToLowerInvariant();
         }
 
         public FeatureElement this[int index] {
@@ -36,7 +36,7 @@ namespace Featcher.Configuration {
 
         new public FeatureElement this[string name] {
             get {
-                return (FeatureElement)BaseGet(name) ?? new FeatureElement { Name = name, Enabled = false };
+                return (FeatureElement)BaseGet(name.ToLowerInvariant()) ?? new FeatureElement { Name = name, Enabled = false };
             }
         }
 
@@ -45,6 +45,7 @@ namespace Featcher.Configuration {
         }
 
         public void Add(FeatureElement details) {
+            details.Name = details.Name.ToLowerInvariant();
             BaseAdd(details);
         }
         protected override void BaseAdd(ConfigurationElement element) {
@@ -52,7 +53,7 @@ namespace Featcher.Configuration {
         }
 
         public void Remove(FeatureElement details) {
-            if (BaseIndexOf(details) >= 0) BaseRemove(details.Name);
+            if (BaseIndexOf(details) >= 0) BaseRemove(details.Name.ToLowerInvariant());
         }
 
         public void RemoveAt(int index) {
@@ -60,7 +61,7 @@ namespace Featcher.Configuration {
         }
 
         public void Remove(string name) {
-            BaseRemove(name);
+            BaseRemove(name.ToLowerInvariant());
         }
 
         public void Clear() {

@@ -6,13 +6,20 @@ using Featcher.Configuration;
 namespace Featcher {
     public static class FeatureSwitcher {
         public const string COOKIE_NAME = "featcher";
+
         public static void Toggle(Feature feature, bool enabled) {
+            Toggle(feature.Name, enabled);
+
+        }
+
+        public static void Toggle(string featureName, bool enabled) {
+            if (String.IsNullOrEmpty(featureName)) return;
             var context = HttpContext.Current;
             if (context == null) return;
             var cookies = context.Request.Cookies;
             var cookie = cookies[COOKIE_NAME] ?? new HttpCookie(COOKIE_NAME);
-            cookie.Values[feature.ToString()] = enabled.ToString();
-            context.Response.Cookies.Add(cookie);
+            cookie.Values[featureName] = enabled.ToString();
+            context.Response.AppendCookie(cookie);
         }
 
         public static void Enable(Feature feature) {
@@ -24,19 +31,23 @@ namespace Featcher {
         }
 
         public static bool IsEnabled(Feature feature) {
+            return (IsEnabled(feature.Name));
+        }
+
+        public static bool IsEnabled(string feature) {
             var section = ConfigurationManager.GetSection("featcher");
             var featureSection = section as FeatureSection;
             if (featureSection != null) {
-                var configFeature = featureSection.Feature[feature.ToString()];
+                var configFeature = featureSection.Feature[feature];
                 if (configFeature.Enabled) return (true);
             }
             if (HttpContext.Current == null) return (false);
             var cookies = HttpContext.Current.Request.Cookies;
             var cookie = cookies["featcher"];
             if (cookie == null || !cookie.HasKeys) return (false);
-            if (cookie.Values[feature.ToString()] == null) return (false);
+            if (cookie.Values[feature] == null) return (false);
             bool enabled;
-            return Boolean.TryParse(cookie.Values[feature.ToString()], out enabled) && enabled;
+            return Boolean.TryParse(cookie.Values[feature], out enabled) && enabled;
         }
     }
 }
