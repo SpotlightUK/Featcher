@@ -2,12 +2,13 @@
 using System.Configuration;
 using System.Web;
 using Featcher.Configuration;
+using Featcher.Interfaces;
 
 namespace Featcher {
     public static class FeatureSwitcher {
         public const string COOKIE_NAME = "featcher";
 
-        public static void Toggle(Feature feature, bool enabled) {
+        public static void Toggle(IFeature feature, bool enabled) {
             Toggle(feature.Name, enabled);
 
         }
@@ -22,15 +23,15 @@ namespace Featcher {
             context.Response.AppendCookie(cookie);
         }
 
-        public static void Enable(Feature feature) {
+        public static void Enable(IFeature feature) {
             Toggle(feature, true);
         }
 
-        public static void Disable(Feature feature) {
+        public static void Disable(IFeature feature) {
             Toggle(feature, false);
         }
 
-        public static bool IsEnabled(Feature feature) {
+        public static bool IsEnabled(IFeature feature) {
             return (IsEnabled(feature.Name));
         }
 
@@ -49,5 +50,6 @@ namespace Featcher {
             bool enabled;
             return Boolean.TryParse(cookie.Values[feature], out enabled) && enabled;
         }
+        
     }
 }

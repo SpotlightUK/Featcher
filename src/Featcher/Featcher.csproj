@@ -48,6 +48,9 @@
     <Compile Include="Configuration\FeatureSection.cs" />
     <Compile Include="Feature.cs" />
     <Compile Include="FeatureSwitcher.cs" />
+    <Compile Include="InjectableFeatureSwitcher.cs" />
+    <Compile Include="Interfaces\IFeature.cs" />
+    <Compile Include="Interfaces\IFeatureSwitcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

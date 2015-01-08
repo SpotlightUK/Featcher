@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Featcher.Interfaces;
 
 namespace Featcher {
-    public class Feature {
+    
+
+    public class Feature : IFeature {
         public string Name { get; set; }
         public string Description { get; set; }
 
