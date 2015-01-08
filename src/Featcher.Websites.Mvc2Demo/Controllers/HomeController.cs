@@ -7,6 +7,9 @@ using System.Web.Mvc;
 namespace Featcher.Websites.Mvc2Demo.Controllers {
     [HandleError]
     public class HomeController : Controller {
+
+        private readonly FeatureSwitcher featureSwitcher = new FeatureSwitcher();
+
         public ActionResult Index() {
             return View();
         }
@@ -16,7 +19,7 @@ namespace Featcher.Websites.Mvc2Demo.Controllers {
         }
 
         public ActionResult Toggle(string feature, bool? enable) {
-            if (enable.HasValue) FeatureSwitcher.Toggle(feature, enable.Value);
+            if (enable.HasValue) featureSwitcher.Toggle(feature, enable.Value);
             return (RedirectToAction("Index"));
 
         }

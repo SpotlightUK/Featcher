@@ -3,10 +3,13 @@ using System.Web.Mvc;
 
 namespace Featcher.WebExample.Controllers {
     public class HomeController : Controller {
+
+        private readonly FeatureSwitcher featureSwitcher = new FeatureSwitcher();
+
         public ActionResult Index(string name, bool? enable) {
             var feature = Features.Find(name);
             if (feature != null && enable.HasValue) {
-                FeatureSwitcher.Toggle(feature, enable.Value);
+				featureSwitcher.Toggle(feature, enable.Value);
             }
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
             return View();
