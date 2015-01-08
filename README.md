@@ -18,7 +18,9 @@ if(FeatureSwitcher.IsEnabled(Features.NewsTicker)) {
 How To Define your Features
 ---------------------------
 
-Create a static class in **your project** that exposes each of your switchable project features as a static property. Featcher doesn't restrict how you do this, but you do need an instance of `Feature` for each feature you want to switch.
+You can do everything with strings - all feature-switching methods can take a string argument which is the name of the feature.
+
+There's a slightly nicer way to manage them, though. Create a static class in **your project** that exposes each of your switchable project features as a static property. Featcher doesn't restrict how you do this, but you do need an instance of `Feature` for each feature you want to switch.
 
     public static class Features {
         public static Feature BigRedBox = new Feature("BigRedBox", "Shows a big red box on the landing page");
@@ -34,6 +36,12 @@ Create a static class in **your project** that exposes each of your switchable p
         public static Feature Find(string name) {
             return (AllFeatures.FirstOrDefault(feature => feature.Name == name));
         }
+    }
+
+This gives you enum-style intellisense for your features:
+
+    if (FeatureSwitcher.IsEnabled(Features.BigRedBox)) {
+      // do something with a big red box!
     }
 
 Temporarily Enable a Feature
