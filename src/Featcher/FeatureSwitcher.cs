@@ -1,18 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Web;
 using Featcher.Configuration;
+using Featcher.Interfaces;
 
 namespace Featcher {
-    public static class FeatureSwitcher {
+    public class FeatureSwitcher : IFeatureSwitcher {
         public const string COOKIE_NAME = "featcher";
 
-        public static void Toggle(Feature feature, bool enabled) {
+        public void Toggle(Feature feature, bool enabled) {
             Toggle(feature.Name, enabled);
 
         }
 
-        public static void Toggle(string featureName, bool enabled) {
+        public void Toggle(string featureName, bool enabled) {
             if (String.IsNullOrEmpty(featureName)) return;
             var context = HttpContext.Current;
             if (context == null) return;
@@ -22,19 +24,20 @@ namespace Featcher {
             context.Response.AppendCookie(cookie);
         }
 
-        public static void Enable(Feature feature) {
+        public void Enable(Feature feature) {
             Toggle(feature, true);
         }
 
-        public static void Disable(Feature feature) {
+        public void Disable(Feature feature) {
             Toggle(feature, false);
         }
 
-        public static bool IsEnabled(Feature feature) {
+        public bool IsEnabled(Feature feature) {
             return (IsEnabled(feature.Name));
         }
 
-        public static bool IsEnabled(string feature) {
+        public bool IsEnabled(string feature) {
+           
             var section = ConfigurationManager.GetSection("featcher");
             var featureSection = section as FeatureSection;
             if (featureSection != null) {
