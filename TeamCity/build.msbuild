@@ -3,11 +3,7 @@
 	<UsingTask AssemblyFile="..\src\packages\MSBuildTasks.1.4.0.61\tools\MSBuild.Community.Tasks.dll" TaskName="MSBuild.Community.Tasks.AssemblyInfo" />
 	
 	<ItemGroup>	
-		<AssemblyInfoProject Include="Spotlight.Portal.Common" />
-		<!--
-		<AssemblyInfoProject Include="Spotlight.Portal.Website" />
-		<AssemblyInfoProject Include="Spotlight.Web.Security" />
-		-->
+		<AssemblyInfoProject Include="Featcher" />
 	</ItemGroup>
 
 	<Target Name="Build">
@@ -19,7 +15,7 @@
 				 AssemblyConfiguration=""
 				 AssemblyCompany=""
 				 AssemblyProduct="%(Identity)"
-				 AssemblyCopyright="Copyright Spotlight 2013"
+				 AssemblyCopyright="Copyright Spotlight 2015"
 				 AssemblyTrademark=""
 				 ComVisible="false"
 				 AssemblyVersion="$(AssemblyVersion)" 
