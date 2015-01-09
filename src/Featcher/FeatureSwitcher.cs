@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Net.Configuration;
 using System.Web;
 using Featcher.Configuration;
 using Featcher.Interfaces;
@@ -39,13 +40,25 @@ namespace Featcher {
             return (IsEnabled(feature.Name));
         }
 
-        public bool IsEnabled(string feature) {
+        public bool IsEnabledViaConfig(string feature) {
             var section = ConfigurationManager.GetSection("featcher");
             var featureSection = section as FeatureSection;
             if (featureSection != null) {
                 var configFeature = featureSection.Feature[feature];
                 if (configFeature.Enabled) return (true);
             }
+            return (false);
+        }
+
+        public bool IsEnabledViaCookie(Feature feature) {
+            return (IsEnabledViaCookie(feature.Name));
+        }
+
+        public bool IsEnabledViaConfig(Feature feature) {
+            return (IsEnabledViaConfig(feature.Name));
+        }
+
+        public bool IsEnabledViaCookie(string feature) {
             if (HttpContext.Current == null) return (false);
             var cookies = HttpContext.Current.Request.Cookies;
             var cookie = cookies["featcher"];
@@ -53,6 +66,10 @@ namespace Featcher {
             if (cookie.Values[feature] == null) return (false);
             bool enabled;
             return Boolean.TryParse(cookie.Values[feature], out enabled) && enabled;
+        }
+
+        public bool IsEnabled(string feature) {
+            return (IsEnabledViaConfig(feature) || IsEnabledViaCookie(feature));
         }
     }
 }
