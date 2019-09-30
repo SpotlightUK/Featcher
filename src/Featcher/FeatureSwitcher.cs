@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Net.Configuration;
+using System.Linq;
 using System.Web;
 using Featcher.Configuration;
 using Featcher.Interfaces;
@@ -45,7 +44,9 @@ namespace Featcher {
             var featureSection = section as FeatureSection;
             if (featureSection != null) {
                 var configFeature = featureSection.Feature[feature];
-                if (configFeature.Enabled) return (true);
+                if (configFeature.Enabled) {
+                    return (true);
+                }
             }
             return (false);
         }
@@ -59,17 +60,37 @@ namespace Featcher {
         }
 
         public bool IsEnabledViaCookie(string feature) {
-            if (HttpContext.Current == null) return (false);
+            if (HttpContext.Current == null) {
+                return (false);
+            }
             var cookies = HttpContext.Current.Request.Cookies;
             var cookie = cookies["featcher"];
-            if (cookie == null || !cookie.HasKeys) return (false);
-            if (cookie.Values[feature] == null) return (false);
+            if (cookie == null || !cookie.HasKeys) {
+                return (false);
+            }
+            if (cookie.Values[feature] == null) {
+                return (false);
+            }
             bool enabled;
             return Boolean.TryParse(cookie.Values[feature], out enabled) && enabled;
         }
 
+        public bool IsEnabledViaQueryString(string feature) {
+            if (HttpContext.Current == null) {
+                return false;
+            }
+
+            var qsParam = HttpContext.Current.Request.QueryString.AllKeys.Any(x => x.Equals(feature, StringComparison.InvariantCultureIgnoreCase)) ? HttpContext.Current.Request.QueryString[feature] : "false";
+            bool featureEnabled = false;
+            if (bool.TryParse(qsParam, out featureEnabled)) {
+                //Persist this option
+                Toggle(feature, featureEnabled);
+            }
+            return featureEnabled;
+        }
+
         public bool IsEnabled(string feature) {
-            return (IsEnabledViaConfig(feature) || IsEnabledViaCookie(feature));
+            return (IsEnabledViaConfig(feature) || IsEnabledViaCookie(feature) || IsEnabledViaQueryString(feature));
         }
     }
 }
